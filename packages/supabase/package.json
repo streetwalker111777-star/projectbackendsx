@@ -1,0 +1,13 @@
+{
+  "name": "@antigravity/supabase",
+  "version": "1.0.0",
+  "main": "client.js",
+  "types": "types.d.ts",
+  "scripts": {
+    "lint": "echo \"no lint yet\"",
+    "test": "echo \"no tests yet\""
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.48.0"
+  }
+}
