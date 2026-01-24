@@ -1,148 +1,125 @@
-# Pamela Zaragoza - Perfil Personal
+# antigravity-platform
 
-Galería web estática personal con diseño moderno, responsive y tema mixto claro/oscuro.
+Monorepo profesional para marketplace de perfiles adultos con moderación.
 
-## 🌐 Demo en Vivo
-
-- **Netlify (recomendado)**: Conecta este repositorio a Netlify para despliegue automático
-- **GitHub Pages**: Disponible en `https://streetwalker111777-star.github.io/pamela-zaragoza-perfil/`
-
-## 📚 Estructura del Proyecto
+## 📚 Estructura
 
 ```
-pamela-zaragoza-perfil/
-├── index.html          # Página principal con galería
-├── css/
-│   └── style.css       # Estilos con tema mixto
-├── images/
-│   ├── pamela-01.jpg   # 10 fotos en total
-│   └── ...
-├── videos/
-│   ├── pamela-01.mp4   # 5 vídeos en total
-│   └── ...
-├── netlify.toml        # Configuración para Netlify
-└── README.md           # Este archivo
+/
+├── apps/
+│   ├── web/              ← Next.js (web pública, solo muestra aprobados)
+│   └── mobile-app/       ← React Native / Expo (crea perfiles pendientes)
+├── packages/
+│   └── supabase/         ← Cliente compartido + tipos
+├── .env.example          ← Variables de entorno
+├── package.json          ← Workspaces configurados
+└── README.md
 ```
 
-## 🚀 Guía de Despliegue (Paso a Paso)
+## ⚙️ Requisitos
 
-### Opción 1: Netlify (Recomendado)
+- **Node.js** 18+
+- **npm** 9+
+- **Proyecto Supabase** con:
+  - Tabla `profiles` con columnas:
+    - `id` (uuid, PK)
+    - `display_name` (text)
+    - `city` (text, nullable)
+    - `bio` (text, nullable)
+    - `avatar_url` (text, nullable)
+    - `status` (text) → valores: `'pending'` | `'approved'` | `'rejected'`
+    - `created_at` (timestamp, default now())
+  - Bucket de storage `profile-avatars` con RLS apropiado
 
-1. **Subir tus fotos y vídeos:**
-   - Crea las carpetas `images/` y `videos/` en la raíz
-   - Añade 10 fotos: `pamela-01.jpg` hasta `pamela-10.jpg`
-   - Añade 5 vídeos: `pamela-01.mp4` hasta `pamela-05.mp4`
-   - Haz commit y push de los archivos
+## 🚀 Instalación
 
-2. **Conectar con Netlify:**
-   - Ve a [netlify.com](https://netlify.com) y crea una cuenta (es gratis)
-   - Haz clic en "Add new site" → "Import an existing project"
-   - Conecta tu cuenta de GitHub
-   - Selecciona este repositorio: `pamela-zaragoza-perfil`
-   - Netlify detectará automáticamente la configuración de `netlify.toml`
-   - Haz clic en "Deploy site"
-
-3. **Personalizar el dominio (opcional):**
-   - En el dashboard de Netlify, ve a "Domain settings"
-   - Cambia el nombre del sitio o conecta un dominio personalizado
-
-### Opción 2: GitHub Pages
-
-1. **Subir tus archivos multimedia** (igual que en Netlify)
-
-2. **Activar GitHub Pages:**
-   - Ve a la pestaña "Settings" de este repositorio
-   - En el menú lateral, haz clic en "Pages"
-   - En "Source", selecciona la rama `main` y la carpeta `/` (root)
-   - Haz clic en "Save"
-   - Espera 1-2 minutos y tu sitio estará en:
-     `https://streetwalker111777-star.github.io/pamela-zaragoza-perfil/`
-
-## 🖼️ Cómo Añadir Tus Fotos y Vídeos
-
-### Método 1: Interfaz Web de GitHub (Más fácil)
-
-1. En este repositorio, haz clic en "Add file" → "Upload files"
-2. Arrastra tus imágenes a la zona de carga
-3. Antes de hacer commit, escribe en el cuadro de nombre:
-   - Para fotos: `images/pamela-01.jpg`
-   - Para vídeos: `videos/pamela-01.mp4`
-4. Repite para cada archivo
-5. Haz clic en "Commit changes"
-
-### Método 2: Git desde tu computadora
+### 1. Clonar repositorio
 
 ```bash
-# Clonar el repositorio
 git clone https://github.com/streetwalker111777-star/pamela-zaragoza-perfil.git
 cd pamela-zaragoza-perfil
-
-# Crear carpetas
-mkdir images videos
-
-# Copiar tus archivos a las carpetas
-cp /ruta/a/tus/fotos/* images/
-cp /ruta/a/tus/videos/* videos/
-
-# Subir los cambios
-git add .
-git commit -m "Añadir fotos y vídeos"
-git push origin main
 ```
 
-## ⚙️ Personalización
-### Cambiar textos e información
-**Edita `index.html`:**
-- Línea 14: Cambiar "Pamela" por tu nombre
-- Línea 15: Cambiar "Zaragoza" y disponibilidad
-- Líneas 22-25: Actualizar datos personales
-- Líneas 74-77: Personalizar la sección "Sobre mí"
-- Línea 83: Añadir enlace de contacto (Telegram, WhatsApp, etc.)
+### 2. Configurar entorno
 
-### Cambiar colores y estilo
+```bash
+cp .env.example .env
+```
 
-**Edita `css/style.css`:**
-- Líneas 1-7: Variables de color (`:root`)
-  - `--accent`: Color principal (por defecto rosa: `#e6397f`)
-  - `--bg-dark`: Fondo oscuro del hero
-  - `--bg-light`: Fondo claro del contenido
+Edita `.env` con tus credenciales de Supabase:
 
-## 📱 Características
+```env
+SUPABASE_URL=https://tuproyecto.supabase.co
+SUPABASE_ANON_KEY=tu_anon_key_aqui
+NEXT_PUBLIC_SUPABASE_URL=https://tuproyecto.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=tu_anon_key_aqui
+```
 
-- ✅ Diseño responsive (se adapta a móviles y tablets)
-- ✅ Lightbox para ampliar fotos al hacer clic
-- ✅ Reproductor de vídeo integrado
-- ✅ Tema mixto claro/oscuro con degradado
-- ✅ Efectos hover en imágenes
-- ✅ 100% estático (sin backend ni base de datos)
-- ✅ Optimizado para SEO
-- ✅ Carga rápida
+### 3. Instalar dependencias
 
-## 👨‍💻 Tecnologías
+```bash
+npm install
+```
 
-- HTML5
-- CSS3 (Grid, Flexbox, Custom Properties)
-- JavaScript Vanilla (para el modal de fotos)
-- Sin dependencias externas
+## 🖥️ Ejecución
 
-## 🔧 Problemas Comunes
+### Web (Next.js)
 
-**Las imágenes no se ven:**
-- Verifica que las imágenes estén en `images/` con los nombres correctos: `pamela-01.jpg`, `pamela-02.jpg`, etc.
-- Asegúrate de que los nombres sean exactamente iguales (mayúsculas/minúsculas importan)
+Muestra solo perfiles con `status = 'approved'`:
 
-**Los vídeos no cargan:**
-- Los vídeos deben estar en formato `.mp4`
-- Si son muy pesados (>50MB), considera comprimirlos con [HandBrake](https://handbrake.fr/)
+```bash
+npm run dev:web
+```
 
-**El sitio no se actualiza:**
-- Espera 1-2 minutos después de hacer push
-- Limpia la caché del navegador (Ctrl+Shift+R en Chrome/Firefox)
+Accede a `http://localhost:3000`
 
-## 📝 Licencia
+### App Móvil (Expo)
 
-Este proyecto es de uso personal. Puedes modificarlo y adaptarlo libremente.
+Crea perfiles con `status = 'pending'`:
+
+```bash
+npm run dev:mobile
+```
+
+Esto abrirá Expo DevTools. Desde ahí puedes:
+- Abrir en emulador Android/iOS
+- Escanear QR con Expo Go en dispositivo físico
+
+## 📝 Scripts Disponibles
+
+| Comando | Descripción |
+|---------|-------------|
+| `npm run dev:web` | Inicia web en desarrollo |
+| `npm run dev:mobile` | Inicia app móvil (Expo) |
+| `npm run build:web` | Build de producción para web |
+| `npm run build:all` | Build de todos los workspaces |
+| `npm run install:all` | Reinstala todas las dependencias |
+
+## 🔐 Seguridad
+
+- **Nunca** publiques `SUPABASE_SERVICE_ROLE_KEY` en este repo
+- Solo usa `SUPABASE_ANON_KEY` en frontend/app
+- Configura **Row Level Security (RLS)** en Supabase:
+  - La web solo debe leer `status = 'approved'`
+  - La app crea con `status = 'pending'`
+  - La moderación se hace desde dashboard de Supabase
+
+## 📦 Flujo de Moderación
+1. Usuario crea perfil en **app móvil** → `status = 'pending'`
+2. Moderador revisa desde **dashboard de Supabase**
+3. Moderador cambia `status` a `'approved'` o `'rejected'`
+4. Solo perfiles `'approved'` aparecen en **web pública**
+
+## 📌 Notas
+
+- Este es un monorepo con **npm workspaces**
+- El paquete `@antigravity/supabase` es compartido por web y app
+- Ambos proyectos son independientes pero comparten backend en Supabase
+
+## 👤 Autor
+
+**streetwalker111777-star**
 
 ---
 
-¿💡 Necesitas ayuda? Abre un [Issue](https://github.com/streetwalker111777-star/pamela-zaragoza-perfil/issues) en este repositorio.
+⚠️ **Advertencia**: Este proyecto es para uso de marketplace de adultos. Asegúrate de cumplir con las leyes locales y regulaciones de contenido para adultos.
