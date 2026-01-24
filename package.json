@@ -1,0 +1,23 @@
+{
+  "name": "antigravity-platform",
+  "private": true,
+  "version": "1.0.0",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:web": "npm run dev --workspace=@antigravity/web",
+    "dev:mobile": "npm run start --workspace=@antigravity/mobile-app",
+    "build:web": "npm run build --workspace=@antigravity/web",
+    "lint:web": "npm run lint --workspace=@antigravity/web",
+    "test:web": "npm test --workspace=@antigravity/web",
+    "install:all": "npm install",
+    "build:all": "npm run build --workspaces --if-present"
+  },
+  "description": "Monorepo para plataforma de perfiles (web pública + app de creación de perfiles) usando Supabase",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/streetwalker111777-star/pamela-zaragoza-perfil.git"
+  }
+}
