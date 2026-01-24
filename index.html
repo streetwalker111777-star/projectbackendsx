@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pamela Zaragoza - Perfil Personal</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="theme-mixed">
+  <header class="hero">
+    <div class="hero-content">
+      <h1>Pamela</h1>
+      <p class="subtitle">Zaragoza · Disponible bajo reserva</p>
+    </div>
+    <div class="hero-photo">
+      <img src="images/pamela-01.jpg" alt="Pamela foto principal">
+    </div>
+  </header>
+
+  <main>
+    <section class="quick-info">
+      <h2>Datos</h2>
+      <ul>
+        <li><strong>Ciudad:</strong> Zaragoza</li>
+        <li><strong>Disponibilidad:</strong> Bajo reserva</li>
+        <li><strong>Idiomas:</strong> Español, Inglés</li>
+      </ul>
+    </section>
+
+    <section class="gallery photos">
+      <h2>Galería de fotos</h2>
+      <div class="grid">
+        <img src="images/pamela-01.jpg" alt="Foto 1" onclick="openModal(this)">
+        <img src="images/pamela-02.jpg" alt="Foto 2" onclick="openModal(this)">
+        <img src="images/pamela-03.jpg" alt="Foto 3" onclick="openModal(this)">
+        <img src="images/pamela-04.jpg" alt="Foto 4" onclick="openModal(this)">
+        <img src="images/pamela-05.jpg" alt="Foto 5" onclick="openModal(this)">
+        <img src="images/pamela-06.jpg" alt="Foto 6" onclick="openModal(this)">
+        <img src="images/pamela-07.jpg" alt="Foto 7" onclick="openModal(this)">
+        <img src="images/pamela-08.jpg" alt="Foto 8" onclick="openModal(this)">
+        <img src="images/pamela-09.jpg" alt="Foto 9" onclick="openModal(this)">
+        <img src="images/pamela-10.jpg" alt="Foto 10" onclick="openModal(this)">
+      </div>
+    </section>
+
+    <section class="gallery videos">
+      <h2>Videos</h2>
+      <div class="grid grid-videos">
+        <video controls>
+          <source src="videos/pamela-01.mp4" type="video/mp4">
+        </video>
+        <video controls>
+          <source src="videos/pamela-02.mp4" type="video/mp4">
+        </video>
+        <video controls>
+          <source src="videos/pamela-03.mp4" type="video/mp4">
+        </video>
+        <video controls>
+          <source src="videos/pamela-04.mp4" type="video/mp4">
+        </video>
+        <video controls>
+          <source src="videos/pamela-05.mp4" type="video/mp4">
+        </video>
+      </div>
+    </section>
+
+    <section class="bio">
+      <h2>Sobre mí</h2>
+      <p>
+        Elegancia y sensualidad en Zaragoza. Cada encuentro es único y especial.
+        Disfruto de conversaciones interesantes y momentos inolvidables.
+      </p>
+    </section>
+
+    <section class="contact">
+      <h2>Contacto</h2>
+      <p>Para reservas y consultas, contacta a través de tu medio preferido.</p>
+      <div class="contact-buttons">
+        <a href="#" class="btn">Contactar</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal para ampliar fotos -->
+  <div id="imageModal" class="modal" onclick="closeModal()">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="modalImg">
+  </div>
+
+  <script>
+    function openModal(img) {
+      document.getElementById('imageModal').style.display = 'flex';
+      document.getElementById('modalImg').src = img.src;
+    }
+
+    function closeModal() {
+      document.getElementById('imageModal').style.display = 'none';
+    }
+
+    // Cerrar con tecla ESC
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape') {
+        closeModal();
+      }
+    });
+  </script>
+</body>
+</html>
