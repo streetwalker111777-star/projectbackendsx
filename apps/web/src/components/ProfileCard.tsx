@@ -11,20 +11,23 @@ export default function ProfileCard({ profile }: ProfileCardProps) {
         {profile.avatar_url && (
           <img
             src={profile.avatar_url}
-            alt={profile.full_name}
+            alt={profile.full_name ?? ''}
             className="w-16 h-16 rounded-full object-cover"
           />
         )}
         <div>
-          <h3 className="text-xl font-semibold">{profile.full_name}</h3>
-          <p className="text-gray-600">{profile.bio}</p>
-          <span className={`inline-block px-2 py-1 text-xs rounded mt-2 ${
-            profile.status === 'approved' 
-              ? 'bg-green-100 text-green-800' 
-              : 'bg-yellow-100 text-yellow-800'
-          }`}>
-            {profile.status}
-          </span>
+          <h3 className="text-xl font-semibold">{profile.full_name ?? profile.username}</h3>
+          <p className="text-gray-600">{profile.username}</p>
+          {profile.website && (
+            <a
+              href={profile.website}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-500 text-sm hover:underline"
+            >
+              {profile.website}
+            </a>
+          )}
         </div>
       </div>
     </div>
